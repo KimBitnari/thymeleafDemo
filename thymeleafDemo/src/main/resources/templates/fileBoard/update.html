@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>파일게시판-내용수정</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/update.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div>
+			<div class="head">
+				<div th:replace="./inc/header"></div>
+			</div>
+			<br/><br/>
+			
+			<div class="container">
+				<form role="form" th:object="${fileBoardVO}" th:action="@{/fileBoard/updateProc}" method="post">
+					<div>
+						<label for="title">제목</label>
+						<input type="text" id="title" name="title" th:value="${detail.title}">
+					</div>
+					<div>
+						<label for="writer">작성자</label>
+						<input type="text" id="writer" name="writer" th:value="${detail.writer}" disabled="disabled">
+					</div>
+					<div>
+						<label for="content">내용</label>
+						<textarea id="content" name="content">[[${detail.content}]]</textarea>
+					</div>
+					<div style="text-align: right;">
+						<input type="hidden" name="b_no" th:value="${detail.b_no}">
+						<input class="button" type="submit" th:value="목록" th:formaction="@{/fileBoard/list}">
+						<input class="button" type="submit" th:value="저장">
+						<input class="button" type="submit" th:value="삭제" th:formaction="@{/fileBoard/delete/{bno}(bno=${detail.b_no})}">
+					</div>
+				</form>
+			</div>
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>파일게시판-리스트페이지</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/list.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="./inc/header"></div>
+		</div>
+		<br/>
+		
+		<div class="container">			
+			<div style="text-align: right;">
+				<button onclick="location.href='/fileBoard/insert'">글 작성</button>
+			</div>
+			<br/>
+			
+			<!-- 타임리프 관련 태그에 내용이 없어도 무조건 에러  -->
+			
+			<div>
+				<table>
+					<thead>
+						<tr class="tableHeader">
+							<th>No.</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data, num : ${testlist}" th:onclick="'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''" class="detailHover">
+							<td th:text="${data.b_no}" style="display: none;"></td>
+							<td th:text="${num.count}"></td>
+							<td th:text="${data.title}"></td>
+							<td th:text="${data.writer}"></td>
+							<td th:text="${data.now_date}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>
